@@ -1,0 +1,84 @@
+import java.applet.Applet;
+import java.awt.*;
+
+public class HelloWorld extends Applet {
+  // This method is mandatory, but can be empty (i.e., have no actual code).
+  public void init() { }
+ 
+  // This method is mandatory, but can be empty.(i.e.,have no actual code).
+  public void stop() { }
+ 
+  
+  public void paint(Graphics g) {
+	
+    //g.setColor(Color.MAGENTA);
+    //g.fillRect(0,0,360,360);
+    //g.setColor(Color.BLUE);
+    //g.fillRect(10,10,340,340);
+    
+   
+	//long hair
+	g.setColor(Color.BLACK);
+	g.fillOval(70,110,50,200);
+	g.fillOval(220,110,50,200);
+		
+	  
+	//ears
+	Color c = new Color(251,230,179);  
+	Color c1 = new Color(233,169,105);
+	g.setColor(c1);
+	g.drawArc(85,160,30,50,0,360);
+	g.drawArc(225,160,30,50,0,360);
+	g.setColor(c);
+	g.fillArc(85,160,30,50,0,360);
+	g.fillArc(225,160,30,50,0,360);
+	
+	
+    //Face
+	g.setColor(c);
+    g.fillArc(100,100,140,180,0,360);
+    
+    //Faceline
+	g.setColor(c1);
+    g.drawArc(100,100,140,180,0,360);
+    
+
+	//hair
+	g.setColor(Color.BLACK);
+	g.fillOval(130,90,50,50);
+	g.fillOval(160,90,50,50);
+	g.fillOval(90,95,50,50);
+	g.fillOval(200,95,50,50);
+	
+	
+    
+    //eyes
+    Color c2 = new Color(255,255,255);
+    g.setColor(c2);
+    g.fillOval(130,140,30,30);
+    g.fillOval(180,140,30,30);
+    
+    //eyeballs
+    Color c3 = new Color(38,30,11);
+    g.setColor(c3);
+    g.fillOval(140,150,10,10);
+    g.fillOval(190,150,10,10);
+        
+    //mouth
+    Color c5 = new Color(243,104,86);
+    g.setColor(c5);
+    g.drawArc( 145, 210, 50, 50, 180, 180 );
+        
+    //nose
+    Color c4 = new Color(233,169,105);
+    g.setColor(c4);
+    g.fillArc( 145, 160, 50, 50, 240, 60 );
+               
+
+    //my nickname
+    g.setColor(Color.BLACK);
+    g.drawString("Pie",300,300);
+    
+		   
+   }
+}

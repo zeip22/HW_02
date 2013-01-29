@@ -1,0 +1,91 @@
+import java.awt.*;
+import java.applet.Applet;
+import java.util.Calendar;
+import java.util.Date;
+public class MyAvatarClock extends MyAvatar implements Runnable {
+	protected Thread mainThread;
+	protected int delay;
+	protected int secx, secy;		
+	protected boolean sechand;
+	//Graphics grf;
+	
+	public void init(){
+		mainThread = null;
+		delay = 200;
+	}
+	
+	public void start(){
+		mainThread = new Thread(this);
+		mainThread.start();
+	}
+	
+	public void run(){
+		while(Thread.currentThread() == mainThread){
+			repaint();
+			try{
+				Thread.currentThread().sleep(delay);
+			}catch(InterruptedException e){}
+		}
+	}
+	
+
+	public void drawClockFace(Graphics g){
+		int   X_CENTER = 170;
+        int   Y_CENTER = 200;
+    	float	angle, numPix, angInc;
+        float	radius = 140.0f;
+        int     x, y;
+        
+        numPix = 60;
+        angInc = (float) (2.0 * Math.PI / numPix);
+        for (angle = 0.0f; angle < 2.0 * Math.PI; angle += angInc){
+            x = X_CENTER + (int) (radius * Math.cos(angle));
+            y = Y_CENTER + (int) (radius * Math.sin(angle));
+
+            g.drawLine(x, y, x, y);
+        }
+	}
+	
+	public void painthands(Graphics g) {  //painthands paints the moving parts of the clock
+		/*Date        date = new Date();
+		double      sini, cosi;
+		int         tmpx, tmpy,
+	                ratio = 20,
+	                diameter = this.size().height < this.size().width ? 
+	                        this.size().height-1 : this.size().width-1,
+	                radius = (int)(diameter/2);	
+	    float       seconds = date.getSeconds(),
+	                marksize = diameter/ratio;
+	    
+		// Draw second hand 
+    cosi = Math.cos(((Math.PI/30)*seconds)-(Math.PI/2))+1;
+    sini = Math.sin(((Math.PI/30)*seconds)-(Math.PI/2))+1;
+    this.secx = (int)((cosi*(diameter-(marksize*4))/2)+(marksize*2));
+    this.secy = (int)((sini*(diameter-(marksize*4))/2)+(marksize*2));
+    if (this.sechand) {
+      g.setColor(Color.red);
+      g.drawLine(170, 200, this.secx, this.secy);
+    }*/
+		Calendar c = Calendar.getInstance();
+		int s = c.get(Calendar.SECOND);
+		g.drawString(s+"",164,50);		
+		
+		/* Second hand  processing        
+        int sx2 = (int)(cent_x+r*Math.sin(s*6*rd)); // Second hand top X coordinate
+        int sy2 = (int)(cent_y-r*Math.cos(s*6*rd)); // Second hand top Y coordinate
+        grf.setColor(Color.red);                // Second hand color setting      
+        grf.drawLine(cent_x,cent_y,sx2,sy2);    // Second hand drawing            
+
+        grf.setColor(Color.red);                // Center dot color setting       
+        grf.fillOval(cent_x-5,cent_y-5,10,10);  // Drawing circle of 10 pixel     
+		*/
+	}
+
+	
+	public void paint(Graphics g){
+		super.paint(g);
+		drawClockFace(g);
+		painthands(g);
+		
+	}
+}

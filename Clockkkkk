@@ -1,0 +1,71 @@
+import java.awt.*;
+import java.util.Calendar;
+import java.applet.Applet;
+public class Clockkkkk extends MyAvatar implements Runnable {
+protected Thread mainThread;
+protected int delay; int i =0;int j = 0;
+public void init(){
+mainThread = null;
+delay = 1000;
+}
+public void start(){
+if(mainThread ==null){
+mainThread = new Thread(this);
+mainThread.start();
+}}
+public void run(){
+while(Thread.currentThread() == mainThread){
+repaint(); i+=6; j+=1;
+try{
+Thread.currentThread().sleep(delay);
+}
+catch(InterruptedException e){
+}
+}
+}
+public void paint (Graphics g){
+Dimension d = this.getSize();
+g.setColor(Color.white);
+g.fillRect(0, 0, d.width, d.height);
+g.setColor(Color.black);
+super.paint(g);
+g.setColor(Color.white);
+g.fillOval(160, 210, 80, 60);
+g.fillOval(295,210,80,60);
+g.setColor(Color.black);
+drawEyes(g,i);
+g.setColor(Color.black);
+for(int a= 0; a<60;a++){
+int r = 300;
+int x = (int)(290+r*Math.sin(Math.toRadians(6*a)));
+int y = (int)(320-r*Math.cos(Math.toRadians(6*a)));
+g.setColor(Color.black);
+if(a%5==0){
+g.drawString(""+a%60, x, y);
+}
+else{
+g.fillOval(x, y, 5, 5);
+}
+}
+drawClock(g,j);
+}
+public void drawEyes(Graphics g,int i){
+int x1 = (int)(200+20*Math.sin(Math.toRadians(i)));
+int x2 = (int)(330+20*Math.sin(Math.toRadians(i)));
+int y = (int)(250-20*Math.cos(Math.toRadians(i)));
+g.fillOval(x1, y, 15, 15);
+g.fillOval(x2, y, 15, 15);
+}
+public void drawClock(Graphics g, int j){
+int r = 300;
+int x = (int)(290+r*Math.sin(Math.toRadians(6*j)));
+int y = (int)(320-r*Math.cos(Math.toRadians(6*j)));
+g.setColor(Color.red);
+if(j%5==0){
+g.drawString(""+j%60,x, y);
+}
+else{
+g.fillOval(x, y, 10, 10);
+}
+}
+}
